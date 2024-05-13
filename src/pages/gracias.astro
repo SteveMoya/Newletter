@@ -1,0 +1,42 @@
+---
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import Layout from "@/layouts/Layout.astro";
+import { subscribeEmail } from "@/lib/resend";
+import { z } from "astro:content";
+
+const url = new URL(Astro.request.url);
+
+const email = url.searchParams.get("email");
+
+console.log(email);
+
+const emailSchema = z.string().email();
+
+const validEmail = emailSchema.safeParse(email);
+
+console.log(validEmail);
+
+if (validEmail.success) {
+    await subscribeEmail(validEmail.data);
+} 
+// else {
+//     return Astro.redirect("/");
+// }
+---
+
+<Layout title="Página de agradecimiento por suscripción al formulario">
+    <Card client:load>
+        <CardHeader client:load>
+            <CardTitle client:load>Gracias por tu suscripción</CardTitle>
+            <CardDescription client:load>
+                <p>Su suscripción ha sido exitosa, ¡Felicidades!</p>
+            </CardDescription>
+        </CardHeader>
+        <CardContent client:load>
+            <Button client:load>
+                <a href="/">Volver al inicio</a>
+            </Button>
+        </CardContent>
+    </Card>
+</Layout>

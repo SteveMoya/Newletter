@@ -1,0 +1,31 @@
+---
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card";
+import Layout from "@/layouts/Layout.astro";
+---
+
+<Layout title="Confirma tu suscripción a la newsletter">
+    <Card client:load>
+        <CardHeader client:load>
+            <CardTitle client:load>Confirma tu suscripción</CardTitle>
+            <CardDescription client:load>
+                Por favor, confirma tu suscripción a la newsletter.
+            </CardDescription>
+        </CardHeader>
+        <CardContent client:load>
+            <p>
+                Te hemos enviado un correo de confirmación.
+            </p>
+        </CardContent>
+        <CardFooter client:load>
+            <p>Por favor, haz click en el enlace que hay en él para confirmar
+                tu suscripción.</p>
+        </CardFooter>
+    </Card>
+</Layout>
